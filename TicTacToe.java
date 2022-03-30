@@ -1,9 +1,7 @@
 import java.util.*;
 
-// Bugs:
-//
+// Bug:
 // Off by one error for user placing on grid
-// Must handle edge case where cpu overwrites player position
 
 public class TicTacToe {
 
@@ -117,12 +115,21 @@ public class TicTacToe {
             System.out.println("Enter your placement (1-9): ");
             int  pos = scan.nextInt();
 
-            System.out.println(pos);
+            while(playerPositions.contains(pos) || cpuPositions.contains(pos)){
+
+                System.out.println("Position taken! Enter a correct Position!");
+                pos = scan.nextInt();
+            }
 
 
             placePiece(gameBoard, pos, "player");
             Random rand = new Random();
             int cpuPos = rand.nextInt(9) + 1;
+            while(playerPositions.contains(cpuPos) || cpuPositions.contains(cpuPos)){
+
+                System.out.println("Position taken! Enter a correct position!");
+                pos = scan.nextInt();
+            }
             placePiece(gameBoard, cpuPos, "cpu");
             printGameBoard(gameBoard);
 
